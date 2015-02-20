@@ -22,9 +22,9 @@ View.prototype.getEnteredParams = function(){
 View.prototype.addReturnedResults = function(results){
 	console.log("i'm printing from the view")
 	for (var i = 0; i < 5; i ++){
-			console.log(results.items[i].volumeInfo.title)
-			console.log(results.items[i].volumeInfo.authors)
-			console.log(results.items[i].volumeInfo.pageCount)
+			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.title + '</li>')
+			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.authors + '</li>')
+			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.pageCount + '</li>')
 	}
 	// use this method to append results from google books to ul
 }
