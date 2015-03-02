@@ -1,6 +1,7 @@
 // =============models================
 
-
+// make a library section
+// the user should be able to click on a button and add that book to their library
 
 
 // =============view================
