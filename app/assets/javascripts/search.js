@@ -13,6 +13,8 @@ function View(){
 
 View.prototype.clearViewResults = function(){
 	console.log("reseting your stuff yo")
+	debugger
+	$(this.resultsContainer).children().remove()
 }
 
 View.prototype.getEnteredParams = function(){
@@ -25,8 +27,10 @@ View.prototype.addReturnedResults = function(results){
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.title + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.authors + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.pageCount + '</li>')
+			$(this.resultsContainer).append('<li>'+ results.items[i]['selfLink'] + '</li>')
+			$(this.resultsContainer).append('<li><img src=' + results.items[i].volumeInfo.imageLinks.thumbnail + '></li><br><br>')
 	}
-	// use this method to append results from google books to ul
+	// figure out a way to also have link to the reviews for results
 }
 
 // =============controller================
@@ -48,14 +52,6 @@ Controller.prototype.enterSearchTerms = function(){
 		dataType: "json"
 	});
 	requestToGoogleBooks.done(function(event){
-		// console.log("printing results")
-		console.log(event)
-		// for (var i = 0; i < 5; i++){
-
-		// 	console.log(event.items[i].volumeInfo.title)
-		// 	console.log(event.items[i].volumeInfo.authors)
-		// 	console.log(event.items[i].volumeInfo.pageCount)
-		// }
 		controllerScope.view.addReturnedResults(event)
 	})
 }
