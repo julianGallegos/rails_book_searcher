@@ -1,7 +1,7 @@
 // =============models================
 
 // make a library section
-// the user should be able to click on a button and add that book to their library
+// the user should be able to click on a button and add that book to their
 
 
 // =============view================
@@ -14,7 +14,7 @@ function View(){
 
 View.prototype.clearViewResults = function(){
 	console.log("reseting your stuff yo")
-	debugger
+	
 	$(this.resultsContainer).children().remove()
 }
 
@@ -24,12 +24,15 @@ View.prototype.getEnteredParams = function(){
 
 View.prototype.addReturnedResults = function(results){
 	console.log("i'm printing from the view")
+	
+	console.log(results.items[0])
+	debugger
 	for (var i = 0; i < 5; i ++){
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.title + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.authors + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.pageCount + '</li>')
-			$(this.resultsContainer).append('<li>'+ results.items[i]['selfLink'] + '</li>')
-			$(this.resultsContainer).append('<li><img src=' + results.items[i].volumeInfo.imageLinks.thumbnail + '></li><br><br>')
+			// $(this.resultsContainer).append('<li>'+ results.items[i]['selfLink'] + '</li>')
+			$(this.resultsContainer).append('<li><a href=' + results.items[i]['volumeInfo']['canonicalVolumeLink'] + '><img src=' + results.items[i].volumeInfo.imageLinks.thumbnail + '></a></li><br><br>')
 	}
 	// figure out a way to also have link to the reviews for results
 }
