@@ -2,7 +2,13 @@
 
 // make a library section
 // the user should be able to click on a button and add that book to their
+function Model(){
+	this.libaray = []
+}
 
+Model.prototype.addBookToLibarayArray = function(){
+	console.log("Pushing book into libaray array")
+}
 
 // =============view================
 function View(){
@@ -10,6 +16,7 @@ function View(){
 	this.searchButton = "#button";
 	this.resetbutton = "#reset";
 	this.resultsContainer = ".search_results"
+	this.libraryButton = ".libraryButton"
 }
 
 View.prototype.clearViewResults = function(){
@@ -22,24 +29,29 @@ View.prototype.getEnteredParams = function(){
 	return $(this.bookParams).val();
 }
 
+View.prototype.addToLibrary = function(){
+	console.log("adding to the library")
+}
+
 View.prototype.addReturnedResults = function(results){
 	console.log("i'm printing from the view")
 	
 	console.log(results.items[0])
-	debugger
 	for (var i = 0; i < 5; i ++){
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.title + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.authors + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.pageCount + '</li>')
 			// $(this.resultsContainer).append('<li>'+ results.items[i]['selfLink'] + '</li>')
-			$(this.resultsContainer).append('<li><a href=' + results.items[i]['volumeInfo']['canonicalVolumeLink'] + '><img src=' + results.items[i].volumeInfo.imageLinks.thumbnail + '></a></li><br><br>')
+			$(this.resultsContainer).append('<li><a href=' + results.items[i]['volumeInfo']['canonicalVolumeLink'] + '><img src=' + results.items[i].volumeInfo.imageLinks.thumbnail + '></a></li><br>')
+			$(this.resultsContainer).append('<button class="libraryButton btn btn-info btn-sm" type="button">Add to Library</button><br><br>')
+						
 	}
-	// figure out a way to also have link to the reviews for results
 }
 
 // =============controller================
 
-function Controller(view){
+function Controller(model, view){
+	this.model = model
 	this.view = view;
 }
 
@@ -57,11 +69,21 @@ Controller.prototype.enterSearchTerms = function(){
 	});
 	requestToGoogleBooks.done(function(event){
 		controllerScope.view.addReturnedResults(event)
+		controllerScope.createLibraryButtonHandler();
 	})
 }
 
 Controller.prototype.resetSearch = function(){
 	this.view.clearViewResults();
+}
+
+Controller.prototype.createLibraryButtonHandler = function(){
+	$(this.view.libraryButton).on('click', this.addLibraryBook.bind(this));
+}
+
+Controller.prototype.addLibraryBook = function(){
+	this.view.addToLibrary();
+	this.model.addBookToLibarayArray();
 }
 
 
@@ -71,6 +93,6 @@ Controller.prototype.bindEventHandlers = function(){
 }
 
 $(document).ready(function(){
-	var myGoogleBooks = new Controller(new View());
+	var myGoogleBooks = new Controller(new Model(),new View());
 	myGoogleBooks.bindEventHandlers();
 })
