@@ -1,3 +1,4 @@
+
 class DeviseCreateInstalls < ActiveRecord::Migration
   def change
     create_table(:installs) do |t|
