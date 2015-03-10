@@ -37,11 +37,12 @@ View.prototype.addReturnedResults = function(results){
 	console.log("i'm printing from the view")
 	
 	console.log(results.items[0])
+	debugger
 	for (var i = 0; i < 5; i ++){
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.title + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.authors + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.pageCount + '</li>')
-			// $(this.resultsContainer).append('<li>'+ results.items[i]['selfLink'] + '</li>')
+			// $(this.resultsContainer).append('<li>'+ results.items[0]['volumeInfo']['description'] + '</li>')
 			$(this.resultsContainer).append('<li><a href=' + results.items[i]['volumeInfo']['canonicalVolumeLink'] + '><img src=' + results.items[i].volumeInfo.imageLinks.thumbnail + '></a></li><br>')
 			$(this.resultsContainer).append('<button class="libraryButton btn btn-info btn-sm" type="button">Add to Library</button><br><br>')
 						
