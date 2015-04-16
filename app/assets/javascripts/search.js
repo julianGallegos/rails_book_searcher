@@ -37,7 +37,6 @@ View.prototype.addReturnedResults = function(results){
 	console.log("i'm printing from the view")
 	
 	console.log(results.items[0])
-	debugger
 	for (var i = 0; i < 5; i ++){
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.title + '</li>')
 			$(this.resultsContainer).append('<li>'+ results.items[i].volumeInfo.authors + '</li>')
